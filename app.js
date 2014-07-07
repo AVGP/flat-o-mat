@@ -14,25 +14,19 @@ var x, y,
     canvas = new Canvas(world);
 
 var table = new Table(5, 5);
-
-// The walls
-var walls = [
-  Shape.Prism(Point.ORIGIN,       0.1,   8, 3), 
-  Shape.Prism(new Point(8, 0, 0), 0.1,   8, 3),
-  Shape.Prism(Point.ORIGIN,         8, 0.1, 3),
-  Shape.Prism(new Point(0, 8, 0),   8, 0.1, 3) 
-];
+var room   = new Room(0, 0, 0, 8, 8, 3);
 
 function render() {
   canvas.clear();
-  for(var i=0; i<walls.length; i++) {
-    walls[i] = walls[i].rotateZ(CENTER, ROT_DEGS_PER_FRAME / RAD);
-    iso.add(walls[i], new Color(100, 100, 100, 0.2));
+
+  for(var i=0; i<room.getParts().length; i++) {
+    room.getParts()[i] = room.getParts()[i].rotateZ(CENTER, ROT_DEGS_PER_FRAME / RAD);
+    iso.add(room.getParts()[i], new Color(100, 100, 100, 0.2));
   }
 
   for(var i=0;i<table.getParts().length; i++) {
     table.getParts()[i] = table.getParts()[i].rotateZ(CENTER, ROT_DEGS_PER_FRAME / RAD);
-    iso.add(table[i]);
+    iso.add(table.getParts()[i]);
   }
 
   requestAnimationFrame(render);

@@ -13,17 +13,10 @@ var x, y,
     iso    = new Isomer(world),
     canvas = new Canvas(world);
 
-// A table
-var table = [
-  Shape.Prism(new Point(  5,   5,   0), 0.1, 0.1, 0.5),
-  Shape.Prism(new Point(  5, 5.9,   0), 0.1, 0.1, 0.5),
-  Shape.Prism(new Point(5.9, 5.9,   0), 0.1, 0.1, 0.5),
-  Shape.Prism(new Point(5.9,   5,   0), 0.1, 0.1, 0.5),
-  Shape.Prism(new Point(  5,   5, 0.5),   1,   1, 0.1)
-];
+var table = new Table(5, 5);
 
 // The walls
-walls = [
+var walls = [
   Shape.Prism(Point.ORIGIN,       0.1,   8, 3), 
   Shape.Prism(new Point(8, 0, 0), 0.1,   8, 3),
   Shape.Prism(Point.ORIGIN,         8, 0.1, 3),
@@ -37,8 +30,8 @@ function render() {
     iso.add(walls[i], new Color(100, 100, 100, 0.2));
   }
 
-  for(var i=0;i<table.length; i++) {
-    table[i] = table[i].rotateZ(CENTER, ROT_DEGS_PER_FRAME / RAD);
+  for(var i=0;i<table.getParts().length; i++) {
+    table.getParts()[i] = table.getParts()[i].rotateZ(CENTER, ROT_DEGS_PER_FRAME / RAD);
     iso.add(table[i]);
   }
 
